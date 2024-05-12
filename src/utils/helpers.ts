@@ -17,3 +17,10 @@ export const humanReadableTimeFromSeconds = (seconds: number): string => {
 
   return timeStr;
 };
+
+type Diff<T, U> = T extends U ? never : T; // Remove types from T that are assignable to U
+
+// Type of { ...L, ...R }
+export type Spread<L, R> =
+// Properties in L that don't exist in R
+  Pick<L, Diff<keyof L, keyof R>> & R;
